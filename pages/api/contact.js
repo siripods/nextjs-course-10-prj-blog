@@ -3,8 +3,13 @@ import { MongoClient } from "mongodb";
 // call api: /api/contact
 // use mongodb atlas, login siripod.surabotsophon@stream.co.th
 async function handler(req, res) {
+  console.log("-----api contact handler-----");
   if (req.method === "POST") {
     const { email, name, message } = req.body;
+    console.log("email: ", email);
+    console.log("name: ", name);
+    console.log("message: ", message);
+
     if (
       !email ||
       !email.includes("@") ||
