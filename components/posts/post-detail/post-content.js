@@ -3,6 +3,8 @@ import classes from "./post-content.module.css";
 import PostHeader from "./post-header";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import Image from "next/image";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 const DUMMY_POST = {
   slug: "getting-started-with-nextjs",
@@ -13,6 +15,9 @@ const DUMMY_POST = {
 };
 
 function PostContent(props) {
+  console.log("----- PostContent -----");
+      
+
   const { post } = props;
 
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
@@ -44,8 +49,9 @@ function PostContent(props) {
           </div>
         );
       }
-      return <p>{paragraph.children}</p>
+      return <p>{paragraph.children}</p>;
     },
+    
   };
 
   return (
