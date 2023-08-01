@@ -1,5 +1,7 @@
 import AllPosts from "../../components/posts/all-posts";
 import { getAllPosts } from "../../lib/posts-util";
+import { Fragment } from "react";
+import Head from "next/head";
 
 const DUMMY_POSTS = [
   {
@@ -37,7 +39,17 @@ const DUMMY_POSTS = [
 ];
 
 function AllPostsPage(props) {
-  return <AllPosts posts={props.posts} />;
+  return(
+  <Fragment>
+    <Head>
+      <title>All Posts</title>
+      <meta
+        name="description"
+        content="A list of all programming-related tutorials"
+      />
+    </Head>
+    <AllPosts posts={props.posts} />
+  </Fragment>);
 }
 
 export function getStaticProps() {

@@ -54,6 +54,8 @@ function ContactForm() {
         message: enteredMessage,
       });
       setRequestStatus("success");
+
+      //clear form
       setEnteredMessage("");
       setEnteredEmail("");
       setEnteredName("");
@@ -64,6 +66,8 @@ function ContactForm() {
   }
 
   let notification;
+  // if requestStatus has value "pending", "success", or "error", then object notification will not be null
+  // and notification component will pop-up 
   if (requestStatus === "pending") {
     notification = {
       status: "pending",
