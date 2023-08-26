@@ -1,10 +1,17 @@
-import React from "react";
-import classes from "./post-content.module.css";
-import PostHeader from "./post-header";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import Image from "next/image";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import ReactMarkdown from 'react-markdown';
+import Image from 'next/image';
+//import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+//import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+
+import PostHeader from './post-header';
+import classes from './post-content.module.css';
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import atomDark from "react-syntax-highlighter/dist/cjs/styles/prism/atom-dark";
+import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
+
+SyntaxHighlighter.registerLanguage('js', js);
+SyntaxHighlighter.registerLanguage('css', css);
 
 const DUMMY_POST = {
   slug: "getting-started-with-nextjs",
@@ -16,7 +23,6 @@ const DUMMY_POST = {
 
 function PostContent(props) {
   console.log("----- PostContent -----");
-      
 
   const { post } = props;
 
@@ -36,8 +42,10 @@ function PostContent(props) {
     // },
     p(paragraph) {
       const { node } = paragraph;
-      if (node.children[0].tagName === "img") {
+
+      if (node.children[0].tagName === 'img') {
         const image = node.children[0];
+
         return (
           <div className={classes.image}>
             <Image
@@ -49,9 +57,21 @@ function PostContent(props) {
           </div>
         );
       }
+
       return <p>{paragraph.children}</p>;
     },
-    
+
+    code(code) {
+      const { className, children } = code;
+      const language = className.split('-')[1]; // className is something like language-js => We need the "js" part here
+      return (
+        <SyntaxHighlighter
+          style={atomDark}
+          language={language}
+          children={children}
+        />
+      );
+    },
   };
 
   return (
