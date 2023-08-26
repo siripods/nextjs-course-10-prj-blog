@@ -11,10 +11,9 @@ module.exports = (phase) => {
             }
         };
     }
-    
+
     return {
         env: {
-            mongodb_username: 'siripods',
             mongodb_password: 'mongo1siri',
             mongodb_clustername: 'cluster0',
             mongodb_database: 'my-site'
